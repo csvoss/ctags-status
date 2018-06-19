@@ -27,6 +27,10 @@ findByIndentation = (editor, tagstart, lastline, tagindent, excludes=[]) ->
       # Blank line should not be considered as tag end line
       continue
 
+    if /^\)( -> .*)?:$/i.exec trimmed
+      # End of Python function should not be considered as tag end line
+      continue
+
     is_excluded = false
     if lineindent == tagindent
       for re in excludes when not is_excluded
